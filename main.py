@@ -2,7 +2,7 @@ import bpy
 
 image_width = 1024
 image_height = 1024
-skip_bake = True
+skip_bake = False
 
 
 # 新規画像ノードを生成します。
@@ -189,8 +189,8 @@ def Main():
     finally:
         for i in range(len(keep_slots)):
             remove_material = keep_slots[i].material
-            #keep_slots[i].material = keep_materials[i]
-            # bpy.data.materials.remove(remove_material)
+            keep_slots[i].material = keep_materials[i]
+            bpy.data.materials.remove(remove_material)
 
     # ---------------bake basics---------------
 
