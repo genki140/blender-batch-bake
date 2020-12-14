@@ -221,7 +221,7 @@ def bake_all():
 bl_info = {
     "name"     : "Texture Batch Bake",
     "author"   : "Genki",
-    "version"  : (1,0,0),
+    "version"  : (0,1,0),
     "blender"  : (2,80,0),
     "location" : "Properties > Material > Texture Batch Bake",
     "category" : "Material",
