@@ -132,7 +132,7 @@ def add_new_bsdf_material():
 # メイン処理を実行します。
 
 
-def Main():
+def bake_all():
 
     # ---------------create material slot and material---------------
 
@@ -211,4 +211,64 @@ def Main():
     print('bake:complete')
 
 
-Main()
+
+
+
+
+
+# ―――――――――――――――――――――――――――――以下はアドオン用―――――――――――――――――――――――――――――
+
+bl_info = {
+    "name"     : "Texture Batch Bake",
+    "author"   : "Genki",
+    "version"  : (1,0,0),
+    "blender"  : (2,80,0),
+    "location" : "Properties > Material > Texture Batch Bake",
+    "category" : "Material",
+}
+
+class Panel(bpy.types.Panel):
+    bl_label = "Texture Batch Bake"
+    bl_idname = "OBJECT_PT_PBRBAKE"
+    bl_space_type = 'PROPERTIES'
+    bl_region_type = 'WINDOW'
+    bl_context = "material"
+
+    def draw(self, context):
+        layout = self.layout
+        obj = context.object
+
+        row = layout.row()
+        row.operator("material.texture_batch_bake", 
+            text = "Bake Textures",
+            icon = "TEXTURE")
+            
+        row = layout.row()
+        row.label(text="by Genki Tech")
+            
+
+class Functions(bpy.types.Operator):
+    bl_idname = 'material.texture_batch_bake'
+    bl_label = "Bake Textures"
+    bl_options = {'REGISTER', 'UNDO'}
+    
+    def draw(self, context):
+        layout = self.layout
+        terminate(global_undo)
+        return {'FINISHED'}
+    
+    def execute(self, context):
+        bake_all()
+        return {'FINISHED'}
+
+def register():
+    bpy.utils.register_class(Functions)
+    bpy.utils.register_class(Panel)
+
+def unregister():
+    bpy.utils.unregister_class(Functions)
+    bpy.utils.unregister_class(Panel)
+    
+if __name__ == "__main__":
+    register()
+    
