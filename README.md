@@ -16,6 +16,17 @@
 
 恐らくですが、2.8 以降の Blender に対応しています。
 
+## 一括出力可能なテクスチャ
+
+* ディフューズ（カラー）
+* ノーマル（法線）
+* メタリック（金属 or 非金属）
+* ラフネス（表面の粗さ）
+* エミッション（自己照明）
+* アンビエントオクルージョン
+
+
+
 ## インストール
 
 [GitHub の本アドオンのページ](https://github.com/genki140/blender-batch-bake)から、ZIP でダウンロードします。
@@ -56,7 +67,7 @@ blender を開き、Edit > Preferences から、Add-ons の Install を選択し
 
 確認する必要はありませんが以下のようになっているため、不要なテクスチャノードはこのタイミングで削除しておくと、不要なテクスチャを生成する時間を短縮できます。
 
-ちなみにこのノード構成は、ベイクした後の glTF でのエクスポート時に有効な構成になっています。[Blender の glTF の説明](https://docs.blender.org/manual/ja/dev/addons/import_export/scene_gltf2.html)を参考にしました。
+ちなみにこのノード構成は、ベイクした後の glTF でのエクスポート時に有効な構成になっています。[Blender の glTF の説明](https://docs.blender.org/manual/ja/dev/addons/import_export/scene_gltf2.html)を参考にしました。（AOは特殊なノードにつなぐためBlender上では確認できません）
 
 ![image-20201214223521221](images/image-20201214223521221.png)
 
@@ -105,6 +116,12 @@ https://github.com/vrm-c/UniVRM.git?path=/Assets/VRM#v0.62.0
 glb ファイルを Assets フォルダにドラッグドロップすると自動でプレハブが作られるので、ヒエラルキーに追加して表示します。ちょっと違うのはライティングの違いかと。
 
 ![image-20201214231838109](images/image-20201214231838109.png)
+
+
+
+## ちょっと解説
+
+Blenderには標準でメタリックの書き出しがありません。それでメタリックを書き出すために、一時的にエミッションに入力を差し替えたマテリアルを生成し、エミッションでベイクしています。（終わったら復元しています）
 
 
 
